@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
+import server.ClientHandler;
 
 public class Controller {
     @FXML
@@ -19,6 +20,7 @@ public class Controller {
     @FXML
     private HBox messageBox;
 
+    private ClientHandler clientHandler;
     private final ChatClient client;
 
     public Controller() {
@@ -28,11 +30,14 @@ public class Controller {
 
     public void sendButton(ActionEvent actionEvent) {
         String message =textField.getText();
+        if(message.startsWith("/w")){
+
+        }
+        client.sendMessage(message);
         message.trim();
         if(message.isEmpty()){
             return;
         }
-        textArea.appendText(message+"\n");
         textField.clear();
         textField.requestFocus();
     }

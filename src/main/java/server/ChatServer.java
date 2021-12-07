@@ -22,7 +22,7 @@ public class ChatServer {
     }
 
     public void run() {
-        try (ServerSocket serverSocket = new ServerSocket(2011)) {             //открываем серверсокет
+        try (ServerSocket serverSocket = new ServerSocket(2013)) {             //открываем серверсокет
             while (true) {
                 System.out.println("Wait client connection...");
                 final Socket socket = serverSocket.accept();                       //подключение клиента

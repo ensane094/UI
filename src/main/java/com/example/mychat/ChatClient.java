@@ -21,7 +21,7 @@ public class ChatClient {
 
     public void openConnection() {
         try {
-            socket = new Socket("localhost", 2011);
+            socket = new Socket("localhost", 2013);
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             new Thread(() -> {
