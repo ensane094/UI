@@ -2,9 +2,13 @@ package com.example.mychat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import server.ClientHandler;
+
+import java.util.List;
 
 public class Controller {
     @FXML
@@ -19,8 +23,9 @@ public class Controller {
     private javafx.scene.control.TextField textField;
     @FXML
     private HBox messageBox;
+    @FXML
+    public ListView<String> clientList;
 
-    private ClientHandler clientHandler;
     private final ChatClient client;
 
     public Controller() {
@@ -30,9 +35,6 @@ public class Controller {
 
     public void sendButton(ActionEvent actionEvent) {
         String message =textField.getText();
-        if(message.startsWith("/w")){
-
-        }
         client.sendMessage(message);
         message.trim();
         if(message.isEmpty()){
@@ -54,6 +56,20 @@ public class Controller {
     public void setAuth(boolean succes) {
         loginBox.setVisible(!succes);
         messageBox.setVisible(succes);
-        textArea.setVisible(succes);
+    }
+
+    public void selectClient(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            final String message = textField.getText();
+            final String nick = clientList.getSelectionModel().getSelectedItem();
+            textField.setText("/w "+ nick + " " + message);
+            textField.requestFocus();
+            textField.selectEnd();
+        }
+    }
+
+    public void updateClientList(List<String> clients) {
+        clientList.getItems().clear();
+        clientList.getItems().addAll(clients);
     }
 }

@@ -26,7 +26,7 @@ public class ChatClient {
             out = new DataOutputStream(socket.getOutputStream());
             new Thread(() -> {
                 try {
-                    while (true) {
+                    while (true) {                                      //первый цикл авторизации
                         final String msgAuth = in.readUTF();
                         if (msgAuth.startsWith("/authok")) {
                             final String[] split = msgAuth.split(" ");
@@ -39,10 +39,17 @@ public class ChatClient {
                     while (true) {
                         final String message = in.readUTF();
                         System.out.println("Receive message: " + message);
+                        if (message.startsWith("/")) {
                             if ("/end".equals(message)) {
                                 controller.setAuth(false);
                                 break;
                             }
+                            if (message.startsWith("/clients")) { // /clients nick1 nick0
+                                final String[] tokens = message.replace("/clients ", "").split(" ");
+                                final List<String> clients = Arrays.asList(tokens);
+                                controller.updateClientList(clients);
+                            }
+                        }
                         controller.addMessage(message);
                     }
                 } catch (IOException e) {
