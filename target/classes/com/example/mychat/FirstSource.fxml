@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.TextField?>
-<VBox  xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.mychat.Controller">
+<VBox prefHeight="255.0" prefWidth="487.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.2" fx:controller="com.example.mychat.Controller">
     <padding>
-        <Insets bottom="4" top="4" left="4" right="4"/>
+        <Insets bottom="4" left="4" right="4" top="4" />
     </padding>
-    <TextArea fx:id="TextArea" VBox.vgrow="ALWAYS" editable="false"/>
-    <HBox spacing="3">
-        <TextField fx:id="TextField" HBox.hgrow="ALWAYS" />
-        <Button text="Отправить" onAction="#SendButton" defaultButton="true"/>
+    <HBox fx:id="loginBox" alignment="CENTER" spacing="5" VBox.vgrow="ALWAYS">
+        <TextField fx:id="loginField" prefHeight="26.0" prefWidth="272.0" promptText="Login" />
+        <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="209.0" promptText="Password" />
+        <Button defaultButton="true" onAction="#btnAuthClick" prefHeight="26.0" prefWidth="104.0" text="Auth" />
+    </HBox>
+    <HBox fx:id="messageBox" alignment="CENTER" spacing="5" visible="false" VBox.vgrow="ALWAYS">
+        <VBox spacing="5">
+            <TextArea fx:id="textArea" editable="false" VBox.vgrow="ALWAYS" />
+            <HBox spacing="5">
+                <TextField fx:id="textField" HBox.hgrow="ALWAYS" />
+                <Button defaultButton="true" onAction="#sendButton" prefHeight="26.0" prefWidth="97.0" text="Send" />
+            </HBox>
+        </VBox>
+        <ListView fx:id="clientList" minWidth="200" maxWidth="200" onMouseClicked="#selectClient"/>
     </HBox>
 </VBox>
